@@ -1,0 +1,13 @@
+kubectl create deployment static-webapp --image=salmaan21/statiwebapp:latest --replicas=2 --dry-run=client -o yaml > deployment.yaml
+kubectl expose deployment static-webapp --port=80 --target-port=80 --type=ClusterIP --dry-run=client -o yaml > service.yaml
+
+
+helm create static-webapp
+helm template static-webapp > output.yaml
+
+
+kustomization.yaml
+resources
+  - deployment.yaml
+  - service.yaml
+kubectl kustomize . > output.yaml
