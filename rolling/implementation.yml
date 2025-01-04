@@ -1,0 +1,30 @@
+minikube start
+
+kubectl apply -f rolling/implementation.yml
+
+kubectl get all
+
+kubectl get svc
+
+minikube tunnel
+
+kubectl set image deployment/myapp myapp=salmaan21/statiwebapp:latest
+
+kubectl status rollout deployment/myapp
+
+kubectl rollout history deployment/myapp
+
+kubectl rollout undo deployment/myapp
+
+kubectl delete all --all
+
+autoscaling
+
+kubectl run -i --tty load-generator --image=busybox --restart=Never -- /bin/sh
+
+while true; do :; done
+
+kubectl get pods
+kubectl get hpa
+
+kubectl delete pod load-generator
