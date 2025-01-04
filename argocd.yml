@@ -1,0 +1,14 @@
+# Create the ArgoCD namespace
+kubectl create namespace argocd
+
+# Install ArgoCD using kubectl
+# kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# minikube service argocd-server -n argocd
+
+# kubectl get pods -n argocd
+# kubectl describe pod <argocd-server-pod> -n argocd
+# kubectl logs <argocd-server-pod> -n argocd
+# kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+

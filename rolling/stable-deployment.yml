@@ -5,7 +5,7 @@ metadata:
   labels:
     app: myapp
 spec:
-  replicas: 4  # Number of pods to run
+  replicas: 3
   selector:
     matchLabels:
       app: myapp
@@ -16,9 +16,16 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: salmaan21/statiwebapp:latest  # Image version to deploy
+        image: salmaan21/statiwebapp:latest
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         readinessProbe:
           httpGet:
             path: /
@@ -27,12 +34,15 @@ spec:
           periodSeconds: 3
         livenessProbe:
           httpGet:
-            path: /health
+            path: /
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1  # Allow 1 extra pod during updates
-      maxUnavailable: 0  # Ensure zero downtime
+      maxSurge: 1
+      maxUnavailable: 0
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  # Fail the update if it doesn't progress within 60s
