@@ -27,15 +27,3 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 helm version
 
-helm repo add stable https://charts.helm.sh/stable                
-
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts                  
-
-kubectl create namespace prometheus                   
-
-helm install stable prometheus-community/kube-prometheus-stack -n prometheus             
-kubectl get pods -n prometheus      
-
-kubectl get svc -n prometheus      
-
-
